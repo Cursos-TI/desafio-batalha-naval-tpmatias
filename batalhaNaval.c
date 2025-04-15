@@ -1,31 +1,33 @@
 #include <stdio.h>
 
 int main() {
-    int tabuleiro[5][5] = {{0}};
+    int tabuleiro[10][10] = {{0}};
 
-    // Posicionamento do navio vertical
-    int iVertical = 0, jVertical = 2;
-    for (int i = 0; i < 3; i++) tabuleiro[iVertical + i][jVertical] = 1;
-
-    // Posicionamento do navio horizontal
-    int iHorizontal = 4, jHorizontal = 0;
-    for (int j = 0; j < 4; j++) tabuleiro[iHorizontal][jHorizontal + j] = 2;
-
-    // Exibição de coordenadas dos navios
-    printf("Coordenadas do Navio Vertical:\n");
-    for (int i = 0; i < 3; i++) printf("(%d, %d)\n", iVertical + i, jVertical);
-    printf("\nCoordenadas do Navio Horizontal:\n");
-    for (int j = 0; j < 4; j++) printf("(%d, %d)\n", iHorizontal, jHorizontal + j);
+    // Posicionamento dos navios
+    // Navio vertical
+    for (int i = 0; i < 3; i++) tabuleiro[i][5] = 3;
+    // Navio horizontal
+    for (int j = 0; j < 4; j++) tabuleiro[8][j] = 3;
+    // Navio diagonal (superior esquerda para inferior direita)
+    for (int i = 0; i < 5; i++) tabuleiro[i][i] = 3;
+    // Navio diagonal (inferior esquerda para superior direita)
+    for (int i = 0; i < 5; i++) tabuleiro[9 - i][i] = 3;
 
     // Impressão do tabuleiro
-    printf("\nTabuleiro:\n");
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) printf("%d ", tabuleiro[i][j]);
+    printf("  ");
+    for (char c = 'a'; c <= 'j'; c++) printf("%c ", c);
+    printf("\n");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", i);
+        for (int j = 0; j < 10; j++) printf("%d ", tabuleiro[i][j]);
         printf("\n");
     }
 
     return 0;
 }
+
+
+
 
 
     // Nível Novato - Posicionamento dos Navios
