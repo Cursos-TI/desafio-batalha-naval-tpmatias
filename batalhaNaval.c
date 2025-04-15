@@ -1,30 +1,50 @@
 #include <stdio.h>
 
-int main() {
-    int tabuleiro[10][10] = {{0}};
+#define TAMANHO 5
 
-    // Posicionamento dos navios
-    // Navio vertical
-    for (int i = 0; i < 3; i++) tabuleiro[i][5] = 3;
-    // Navio horizontal
-    for (int j = 0; j < 4; j++) tabuleiro[8][j] = 3;
-    // Navio diagonal (superior esquerda para inferior direita)
-    for (int i = 0; i < 5; i++) tabuleiro[i][i] = 3;
-    // Navio diagonal (inferior esquerda para superior direita)
-    for (int i = 0; i < 5; i++) tabuleiro[9 - i][i] = 3;
-
-    // Impressão do tabuleiro
-    printf("  ");
-    for (char c = 'a'; c <= 'j'; c++) printf("%c ", c);
-    printf("\n");
-    for (int i = 0; i < 10; i++) {
-        printf("%d ", i);
-        for (int j = 0; j < 10; j++) printf("%d ", tabuleiro[i][j]);
+void imprimir(int tabuleiro[TAMANHO][TAMANHO]) {
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) printf("%d ", tabuleiro[i][j]);
         printf("\n");
     }
+}
+
+int main() {
+    int cone[TAMANHO][TAMANHO] = {{0}}, octaedro[TAMANHO][TAMANHO] = {{0}}, cruz[TAMANHO][TAMANHO] = {{0}};
+    int centro = TAMANHO / 2;
+
+    // Cone
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            if (abs(i - centro) + abs(j - centro) <= centro) cone[i][j] = 1;
+        }
+    }
+
+    // Octaedro
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            if (abs(i - centro) + abs(j - centro) <= 2) octaedro[i][j] = 1;
+        }
+    }
+
+    // Cruz
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            if (i == centro || j == centro) cruz[i][j] = 1;
+        }
+    }
+
+    printf("Cone:\n");
+    imprimir(cone);
+    printf("\nOctaedro:\n");
+    imprimir(octaedro);
+    printf("\nCruz:\n");
+    imprimir(cruz);
 
     return 0;
 }
+
+
 
 
 
